@@ -3,7 +3,7 @@ import (
 	"strconv"
 )
 
-func FromNumberImpl(just func(int) any, nothing any, n float64) any {
+func FromNumberImpl(just func(int) interface{}, nothing interface{}, n float64) interface{} {
 	if math.IsNaN(n) || math.IsInf(n, 0) || math.Trunc(n) != n {
 		return nothing
 	}
@@ -14,7 +14,7 @@ func ToNumber(n int) float64 {
 	return float64(n)
 }
 
-func FromStringAsImpl(just func(int) any, nothing any, radix int, s string) any {
+func FromStringAsImpl(just func(int) interface{}, nothing interface{}, radix int, s string) interface{} {
 	val, err := strconv.ParseInt(s, radix, 64)
 	if err != nil {
 		return nothing
