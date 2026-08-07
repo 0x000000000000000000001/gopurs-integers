@@ -15,7 +15,7 @@ func ToNumber(n int) float64 {
 }
 
 func FromStringAsImpl(just func(int) interface{}, nothing interface{}, radix int, s string) interface{} {
-	val, err := strconv.ParseInt(s, radix, 64)
+	val, err := strconv.ParseInt(s, radix, 32)
 	if err != nil {
 		return nothing
 	}
@@ -42,6 +42,15 @@ func Rem(x int, y int) int {
 
 func Pow(x int, y int) int {
 	if y < 0 {
+		if x == 1 {
+			return 1
+		}
+		if x == -1 {
+			if y%2 == 0 {
+				return 1
+			}
+			return -1
+		}
 		return 0
 	}
 	res := 1
